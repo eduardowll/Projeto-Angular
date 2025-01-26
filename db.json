@@ -1,0 +1,34 @@
+{
+  "avioes": [
+    {
+      "id": "aaa2",
+      "modelo": "Boeing 747",
+      "velomaxima": "900 km/h",
+      "numpassageiros": 660
+    },
+    {
+      "id": "aaa3",
+      "modelo": "Airbus A380",
+      "velomaxima": "1020 km/h",
+      "numpassageiros": 850
+    },
+    {
+      "modelo": "Northrop F-5 Tiger",
+      "velomaxima": "1800 km/h",
+      "numpassageiros": 1,
+      "id": "aeb4"
+    },
+    {
+      "id": "ffbf",
+      "modelo": "SR-71 Blackbird",
+      "velomaxima": "3.529 km/h",
+      "numpassageiros": 2
+    },
+    {
+      "modelo": "Concorde",
+      "velomaxima": "2.179 km/h",
+      "numpassageiros": 120,
+      "id": "fde2"
+    }
+  ]
+}

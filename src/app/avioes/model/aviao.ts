@@ -1,6 +1,6 @@
 export interface Aviao {
-    id: number;
-    modelo: String;
-    velomaxima: number;
+    id: string;
+    modelo: string;
+    velomaxima: string;
     numpassageiros: number;
 }

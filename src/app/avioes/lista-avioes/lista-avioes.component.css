@@ -1,0 +1,27 @@
+.table-container {
+    margin: 16px;
+  }
+  
+  .table-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .formulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  
+  mat-form-field {
+    width: 200px;
+  }
+  
+  button {
+    align-self: center;
+  }
+  

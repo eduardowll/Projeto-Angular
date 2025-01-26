@@ -1,25 +1,66 @@
-<table mat-table [dataSource]="avioes_array" class="mat-elevation-z8">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let a"> {{a.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="modelo">
-      <th mat-header-cell *matHeaderCellDef> Modelo </th>
-      <td mat-cell *matCellDef="let a"> {{a.modelo}} </td>
-    </ng-container>
+<div class="form-container">
+    <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Modelo</mat-label>
+        <input matInput formControlName="modelo" />
+      </mat-form-field>
   
-    <ng-container matColumnDef="velocidadeMaxima">
-      <th mat-header-cell *matHeaderCellDef> Velocidade Máxima </th>
-      <td mat-cell *matCellDef="let a"> {{a.velocidadeMaxima}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="numPassageiros">
-      <th mat-header-cell *matHeaderCellDef> Número de Passageiros </th>
-      <td mat-cell *matCellDef="let a"> {{a.numPassageiros}} </td>
-    </ng-container>
+      <mat-form-field appearance="fill">
+        <mat-label>Velocidade Máxima</mat-label>
+        <input matInput formControlName="velomaxima" />
+      </mat-form-field>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <mat-form-field appearance="fill">
+        <mat-label>Número de Passageiros</mat-label>
+        <input matInput type="number" formControlName="numpassageiros" />
+      </mat-form-field>
+  
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="aviaoEditandoId ? updateAviao() : createAviao()"
+      >
+        {{ aviaoEditandoId ? 'Atualizar Avião' : 'Criar Avião' }}
+      </button>
+    </form>
+  </div>
+  
+  <div class="table-container">
+    <table mat-table [dataSource]="avioes_array" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let aviao">{{ aviao.id }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef>Modelo</th>
+        <td mat-cell *matCellDef="let aviao">{{ aviao.modelo }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="velomaxima">
+        <th mat-header-cell *matHeaderCellDef>Velocidade Máxima</th>
+        <td mat-cell *matCellDef="let aviao">{{ aviao.velomaxima }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="numpassageiros">
+        <th mat-header-cell *matHeaderCellDef>Número de Passageiros</th>
+        <td mat-cell *matCellDef="let aviao">{{ aviao.numpassageiros }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let aviao">
+          <button mat-icon-button color="primary" (click)="editAviao(aviao)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteAviao(aviao.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
   
