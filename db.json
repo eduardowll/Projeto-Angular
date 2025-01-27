@@ -1,34 +1,52 @@
 {
   "avioes": [
     {
-      "id": "aaa2",
       "modelo": "Boeing 747",
       "velomaxima": "900 km/h",
-      "numpassageiros": 660
+      "numpassageiros": 660,
+      "categoria": "Viagem",
+      "preco": "418 milhões USD",
+      "id": "aaa2"
     },
     {
-      "id": "aaa3",
       "modelo": "Airbus A380",
       "velomaxima": "1020 km/h",
-      "numpassageiros": 850
+      "numpassageiros": 850,
+      "categoria": "Viagem",
+      "preco": "$445 milhões USD",
+      "id": "aaa3"
     },
     {
       "modelo": "Northrop F-5 Tiger",
       "velomaxima": "1800 km/h",
       "numpassageiros": 1,
+      "categoria": "Caça",
+      "preco": "$2,1 milhões USD ",
       "id": "aeb4"
     },
     {
-      "id": "ffbf",
       "modelo": "SR-71 Blackbird",
       "velomaxima": "3.529 km/h",
-      "numpassageiros": 2
+      "numpassageiros": 2,
+      "categoria": "Jato",
+      "preco": "$34 milhões USD",
+      "id": "ffbf"
     },
     {
       "modelo": "Concorde",
       "velomaxima": "2.179 km/h",
       "numpassageiros": 120,
+      "categoria": "Viagem",
+      "preco": "$200 milhões USD",
       "id": "fde2"
+    },
+    {
+      "modelo": "Phenom 300",
+      "velomaxima": "839 km/h",
+      "numpassageiros": 9,
+      "categoria": "Viagem",
+      "preco": "$10 milhões USD",
+      "id": "3028"
     }
   ]
 }

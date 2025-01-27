@@ -3,4 +3,6 @@ export interface Aviao {
     modelo: string;
     velomaxima: string;
     numpassageiros: number;
+    categoria: string;
+    preco: string;
 }

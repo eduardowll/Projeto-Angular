@@ -11,21 +11,22 @@ export class AvioesService {
 
   constructor(private httpClient:HttpClient) { }
 
-  list():Observable<Aviao[]>{
-    return this.httpClient.get<Aviao[]>(this.API_URL)
+  // Carregar aviões (paginator)
+  list(page: number = 1, size: number = 4): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}?_page=${page}&_per_page=${size}`);
   }
 
-  // Criar um avião
+  // Criar avião
   create(aviao: Aviao): Observable<Aviao> {
     return this.httpClient.post<Aviao>(this.API_URL, aviao);
   }
 
-  // Atualizar um avião
+  // Atualizar avião
   update(aviao: Aviao): Observable<Aviao> {
     return this.httpClient.put<Aviao>(`${this.API_URL}/${aviao.id}`, aviao);
   }
 
-  //  um avião
+  // Deletar avião
   delete(id: string): Observable<any> {
     return this.httpClient.delete<any>(`${this.API_URL}/${id}`);
   }

@@ -1,34 +1,40 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { Aviao } from '../model/aviao';
 import { AvioesService } from '../service/avioes.service';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-lista-avioes',
   standalone: true,
   imports: [
     MatTableModule,
-    MatSnackBarModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatPaginator
   ],
   templateUrl: './lista-avioes.component.html',
   styleUrls: ['./lista-avioes.component.css'],
 })
 export class ListaAvioesComponent {
   avioes_array: Aviao[] = [];
-  displayedColumns = ['id', 'modelo', 'velomaxima', 'numpassageiros', 'acao'];
+  displayedColumns = ['id', 'modelo', 'velomaxima', 'numpassageiros', 'categoria', 'preco', 'acao'];
   form: FormGroup;
   aviaoEditandoId: string | null = null;
+
+  length: number = 0;
+  pageSize: number = 4;
+  pageIndex: number = 0;
 
   constructor(
     private avioesService: AvioesService,
@@ -39,23 +45,35 @@ export class ListaAvioesComponent {
       modelo: [''],
       velomaxima: [''],
       numpassageiros: [null],
+      categoria: [''],
+      preco: ['']
     });
 
-    this.loadAvioes();
+
+
+    this.loadAvioes(); 
   }
 
-  // Carregar aviões
+  // Carregar aviões com paginação
   loadAvioes() {
-    this.avioesService.list().subscribe({
-      next: (p) => {
-        this.avioes_array = p;
+  
+    this.avioesService.list(this.pageIndex + 1, this.pageSize).subscribe({
+      next: (a) => {
+        console.log(a.data);
+        of(a.data).subscribe(x => this.avioes_array = x);
+        this.length = a.items;
+        
       },
       error: () => {
-        this.snackBar.open('Erro ao carregar aviões.', 'Fechar', {
-          duration: 2000,
-        });
+        this.snackBar.open('Erro ao carregar aviões.', 'Fechar', { duration: 2000 });
       },
     });
+  }
+
+  onPageChange($event: PageEvent){
+    this.pageSize = $event.pageSize;
+    this.pageIndex = $event.pageIndex;
+    this.loadAvioes();
   }
 
   // Criar avião
@@ -104,6 +122,8 @@ export class ListaAvioesComponent {
       modelo: aviao.modelo,
       velomaxima: aviao.velomaxima,
       numpassageiros: aviao.numpassageiros,
+      categoria: aviao.categoria,
+      preco: aviao.preco
     });
   }
 
