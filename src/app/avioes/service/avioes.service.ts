@@ -16,6 +16,10 @@ export class AvioesService {
     return this.httpClient.get<any>(`${this.API_URL}?_page=${page}&_per_page=${size}`);
   }
 
+  getId(id: string): Observable<Aviao> {
+    return this.httpClient.get<Aviao>(`${this.API_URL}/${id}`);
+  }
+
   // Criar avião
   create(aviao: Aviao): Observable<Aviao> {
     return this.httpClient.post<Aviao>(this.API_URL, aviao);

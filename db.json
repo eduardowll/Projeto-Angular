@@ -5,7 +5,7 @@
       "velomaxima": "900 km/h",
       "numpassageiros": 660,
       "categoria": "Viagem",
-      "preco": "418 milhões USD",
+      "preco": "$418 milhões USD",
       "id": "aaa2"
     },
     {
@@ -41,12 +41,28 @@
       "id": "fde2"
     },
     {
-      "modelo": "Phenom 300",
-      "velomaxima": "839 km/h",
-      "numpassageiros": 9,
-      "categoria": "Viagem",
-      "preco": "$10 milhões USD",
+      "modelo": "An-225 Mriya",
+      "velomaxima": "850 km/h",
+      "numpassageiros": 6,
+      "categoria": "Carga",
+      "preco": "$250 milhões USD",
       "id": "3028"
+    },
+    {
+      "id": "26c1",
+      "modelo": "F-22 Raptor",
+      "velomaxima": "2.414 km/h",
+      "numpassageiros": 1,
+      "categoria": "Caça",
+      "preco": "$150 milhões USD"
+    },
+    {
+      "id": "d54e",
+      "modelo": "Dassault Falcon 10X",
+      "velomaxima": "1.150 km/h",
+      "numpassageiros": 19,
+      "categoria": "Jato",
+      "preco": "$75 milhões"
     }
   ]
 }

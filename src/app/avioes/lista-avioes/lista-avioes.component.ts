@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { Aviao } from '../model/aviao';
 import { AvioesService } from '../service/avioes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { of } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-avioes',
@@ -21,7 +23,8 @@ import { of } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatPaginator
+    MatPaginator,
+    MatCardModule,
   ],
   templateUrl: './lista-avioes.component.html',
   styleUrls: ['./lista-avioes.component.css'],
@@ -31,6 +34,7 @@ export class ListaAvioesComponent {
   displayedColumns = ['id', 'modelo', 'velomaxima', 'numpassageiros', 'categoria', 'preco', 'acao'];
   form: FormGroup;
   aviaoEditandoId: string | null = null;
+  exibirForm: boolean = false;
 
   length: number = 0;
   pageSize: number = 4;
@@ -39,7 +43,9 @@ export class ListaAvioesComponent {
   constructor(
     private avioesService: AvioesService,
     private fb: FormBuilder,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.form = this.fb.group({
       modelo: [''],
@@ -76,57 +82,23 @@ export class ListaAvioesComponent {
     this.loadAvioes();
   }
 
+  mostrarForm() {
+    this.exibirForm = true; 
+    this.aviaoEditandoId = null; 
+    this.form.reset(); 
+  }
+
   // Criar avião
   createAviao() {
-    if (this.form.valid) {
-      const novoAviao = { ...this.form.value };
-      this.avioesService.create(novoAviao).subscribe({
-        next: () => {
-          this.snackBar.open('Avião criado com sucesso!', 'Fechar', { duration: 2000 });
-          this.loadAvioes();
-          this.form.reset();
-        },
-        error: () => {
-          this.snackBar.open('Erro ao criar avião.', 'Fechar', { duration: 2000 });
-        },
-      });
-    } else {
-      this.snackBar.open('Por favor, preencha todos os campos.', 'Fechar', { duration: 2000 });
-    }
+    this.router.navigate(['/cadastro-aviao']);
+    
   }
 
   // Atualizar avião
-  updateAviao() {
-    if (this.form.valid && this.aviaoEditandoId) {
-      const aviaoAtualizado = { ...this.form.value, id: this.aviaoEditandoId };
-      this.avioesService.update(aviaoAtualizado).subscribe({
-        next: () => {
-          this.snackBar.open('Avião atualizado com sucesso!', 'Fechar', { duration: 2000 });
-          this.loadAvioes();
-          this.form.reset();
-          this.aviaoEditandoId = null;
-        },
-        error: () => {
-          this.snackBar.open('Erro ao atualizar avião.', 'Fechar', { duration: 2000 });
-        },
-      });
-    } else {
-      this.snackBar.open('Por favor, preencha todos os campos.', 'Fechar', { duration: 2000 });
-    }
+  updateAviao(aviao: Aviao) {
+    this.router.navigate([`/atualizar-aviao/${aviao.id}`], {relativeTo: this.activatedRoute});
   }
-
- // Prencher formulario com aviao
-  editAviao(aviao: Aviao) {
-    this.aviaoEditandoId = aviao.id;
-    this.form.patchValue({
-      modelo: aviao.modelo,
-      velomaxima: aviao.velomaxima,
-      numpassageiros: aviao.numpassageiros,
-      categoria: aviao.categoria,
-      preco: aviao.preco
-    });
-  }
-
+  
   // Deletar avião
   deleteAviao(id: string) {
     const confirmDelete = confirm('Tem certeza que deseja excluir este avião?');

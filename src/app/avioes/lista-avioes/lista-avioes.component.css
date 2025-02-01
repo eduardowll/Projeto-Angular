@@ -9,19 +9,12 @@
     margin-bottom: 24px;
   }
   
-  .formulario {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 24px;
-    justify-content: center;
+  .mat-card {
+    justify-items: center;
+    
+    
   }
-  
-  mat-form-field {
-    width: 200px;
-  }
-  
-  button {
-    align-self: center;
-  }
+
+
+
   
